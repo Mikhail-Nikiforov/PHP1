@@ -49,5 +49,10 @@
     echo "$a <br>";
     echo "$b<br>";
     ?>
+   <?php
+    $mark;
+    echo $mark ?? "blabla";
+    echo $mark . "123";
+    ?>
 
    </html>
