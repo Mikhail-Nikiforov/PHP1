@@ -1,144 +1,133 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-
-    </title>
-</head>
-
-<body>
-    <?php
-    echo "Первый пункт ДЗ.<br><br>";
-    $a = rand(-10, 10);
-    $b = rand(-10, 10);
-    var_dump($a);
-    var_dump($b);
-    if ($a >= 0 && $b >= 0) {
-        echo "Переменные положительные. Разность: " . ($a - $b);
-    } elseif ($a < 0 && $b < 0) {
-        echo "Переменные отрицательные. Произведение: " . ($a * $b);
-    } elseif ($a * $b < 0) {
-        echo "Переменные разных знаков. Сумма: " . ($a + $b);
-    }
-    echo "<br><br>Второй пункт ДЗ.<br><br>";
-    $a = rand(0, 15);
-    switch ($a) {
-        case '0':
-            echo $a++ . "<br>";
-        case '1':
-            echo $a++ . "<br>";
-        case '2':
-            echo $a++ . "<br>";
-        case '3':
-            echo $a++ . "<br>";
-        case '4':
-            echo $a++ . "<br>";
-        case '5':
-            echo $a++ . "<br>";
-        case '6':
-            echo $a++ . "<br>";
-        case '7':
-            echo $a++ . "<br>";
-        case '8':
-            echo $a++ . "<br>";
-        case '9':
-            echo $a++ . "<br>";
-        case '10':
-            echo $a++ . "<br>";
-        case '11':
-            echo $a++ . "<br>";
-        case '12':
-            echo $a++ . "<br>";
-        case '13':
-            echo $a++ . "<br>";
-        case '14':
-            echo $a++ . "<br>";
-        case '15':
-            echo $a++ . "<br>";
-    }
-    echo "<br><br>Третий пункт ДЗ.<br><br>";
-    function sum($a, $b)
-    {
-        return $a + $b;
-    }
-    function diff($a, $b)
-    {
-        return $a - $b;
-    }
-    function mult($a, $b)
-    {
-        return $a * $b;
-    }
-    function div($a, $b)
-    {
-        return $a / $b;
-    }
-    echo "Сумма 4 и 5: " . (sum(4, 5)) . "<br>" . "Разность 4 и 5: " . (diff(4, 5)) . "<br>" . "Произведение 4 и 5: " . (mult(4, 5)) . "<br>" . "Частное 4 и 5: " . (div(4, 5)) . "<br>";
-    echo "<br><br>Четвертый пункт ДЗ.<br><br>";
-    function mathOperation($arg1, $arg2, $operation)
-    {
-        switch ($operation) {
-            case 'sum':
-                echo "Сумма $arg1 и $arg2: " . ($operation($arg1, $arg2));
-                break;
-            case 'diff':
-                echo "Разность $arg1 и $arg2: " . ($operation($arg1, $arg2));
-                break;
-            case 'mult':
-                echo "Произведение $arg1 и $arg2: " . ($operation($arg1, $arg2));
-                break;
-            case 'div':
-                echo "Частное $arg1 и $arg2: " . ($operation($arg1, $arg2));
-                break;
+<?php
+    echo "Первое задание <br><br>"; 
+    $a = -1;
+    while ($a++ < 100) {
+        if (!($a % 3)) {
+        echo "$a ";
         }
-    };
-    mathOperation(6, 2, 'diff');
-    echo "<br><br>Пятый пункт ДЗ.<br><br>";
-    echo date("Y");
-    echo "<br><br>Шестой пункт ДЗ.<br><br>";
-    function power($val, $pow)
-    {
-        if ($pow === 0) {
-            return "1";
-        } elseif ($pow > 0) {
-            return $val *= $pow == 1 ? 1 : power($val, $pow - 1);
-        } elseif ($pow < 0) {
-            $pow = -$pow;
-            return 1 / ($val *= $pow < 0 ? 1 : power($val, $pow - 1));
+    }
+    echo "<br><br>Второе задание <br><br>";
+    $b = 0;
+    do {
+        if ($b == 0) {
+            echo "$b - ноль ";
+        } else if ($b % 2) {
+            echo "$b - нечетное число ";
         } else {
-            return "Что-то пошло не так...";
+            echo "$b - четное число ";
+        }
+        $b++;  
+    } while ($b <= 10);
+    echo "<br><br>Третье задание <br><br>";
+    $c = [
+        'Московская область' => ['Москва','Зеленоград', 'Клин'],
+        'Ленинградская область' => ['Санкт-Петербург', 'Всеволожск', 'Павловск', 'Кронштадт'],
+        'Краснодарский край' => ['Краснодар', 'Новороссийск', 'Сочи', 'Тихорецк'],
+    ];
+    foreach ($c as $key => $value) {
+        echo "<br>$key <br>";
+        echo implode(", ",$value) . "<br>";
+    }
+    echo "<br><br>Четвертое задание <br><br>";
+    $d = [
+        'а' => 'a',
+        'б' => 'b',
+        'в' => 'v',
+        'г' => 'g',
+        'д' => 'd',
+        'е' => 'e',
+        'ё' => 'yo',
+        'ж' => 'zh',
+        'з' => 'z',
+        'и' => 'i',
+        'й' => 'y',
+        'к' => 'k',
+        'л' => 'l',
+        'м' => 'm',
+        'н' => 'n',
+        'о' => 'o',
+        'п' => 'p',
+        'р' => 'r',
+        'с' => 's',
+        'т' => 't',
+        'у' => 'u',
+        'ф' => 'f',
+        'х' => 'h',
+        'ц' => 'c',
+        'ч' => 'ch',
+        'ш' => 'sh',
+        'щ' => 'tch',
+        'ъ' => '\'\'',
+        'ы' => 'y\'',
+        'ь' => '\'',
+        'э' => 'e\'',
+        'ю' => 'yu',
+        'я' => 'ya', 
+    ];
+    function transliter($cyrillic) {
+        global $d; 
+        $latin = strtr($cyrillic, $d);
+        return $latin;
+    }
+    var_dump(transliter('дом'));
+    echo "<br><br>Пятое задание <br><br>";
+    function underscore($txt) {
+        $txt = strtr($txt, " ", "-");
+        return $txt;
+    }
+    var_dump(underscore('Один Два Три'));
+    echo "<br><br>Шестое задание <br><br>";
+    $menu = [
+        'main_page' => [
+            'label' => 'Главная страница',
+            'url' => 'index.php',
+        ],
+        'info' => [
+            'label' => 'Информация',
+            'url' => 'info.html',
+            'submenu' => [
+                'contacts' => [
+                    'label' => 'Контакты',
+                    'url' => 'contacts.html',
+                ],
+                'about_us' => [
+                    'label' => 'О нас',
+                    'url' => 'about_us.html',
+                ],
+            ]
+        ],
+        'documentation' => [
+            'label' => 'Документация',
+            'url' => 'documentation.php',
+        ],
+    ];
+    function menu_show ($menu) {
+        printf("<ul>");
+        foreach ($menu as $value) {
+            printf("<li>{$value['label']}</li>");
+            if ($value['submenu']) {
+                menu_show($value['submenu']);
+            }
+        };
+        printf("</ul>");
+    };
+    menu_show($menu);
+    echo "<br><br>Седьмое задание <br><br>";
+    for ($i=0; $i < 10; printf($i++)) { 
+        # code...
+    }
+    echo "<br><br>Восьмое задание <br><br>";
+    $c = [
+        'Московская область' => ['Москва','Зеленоград', 'Клин'],
+        'Ленинградская область' => ['Санкт-Петербург', 'Всеволожск', 'Павловск', 'Кронштадт'],
+        'Краснодарский край' => ['Краснодар', 'Новороссийск', 'Сочи', 'Тихорецк'],
+    ];
+    foreach ($c as $key => $value) {
+        echo "<br>$key <br>";
+        foreach ($value as $value1) {
+            if (strpos($value1, 'К') === 0) {
+                echo "$value1 ";
+            }
         }
     }
-    echo power(14, -3);
-    echo "<br><br>Седьмой пункт ДЗ.<br><br>";
-    function discribe_time($value, $words)
-    {
-        $num = $value % 100;
-        if ($num > 19) {
-            $num = $num % 10;
-        }
-        $result = $value . ' ';
-        switch ($num) {
-            case 1:
-                $result .= $words[0];
-                break;
-            case 4:
-                $result .= $words[1];
-                break;
-            default:
-                $result .= $words[2];
-                break;
-        }
-
-        return $result;
-    }
-    echo discribe_time(1, array('час', 'часа', 'часов')) . " " . discribe_time(1, array('минута', 'минуты', 'минут'));
-    ?>
-</body>
-
-
-</html>
+?>
