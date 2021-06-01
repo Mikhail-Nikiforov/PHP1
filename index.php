@@ -19,9 +19,8 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
             if (move_uploaded_file($_FILES['image']['tmp_name'], 'pub/img/'. $_FILES['image']['name'])) {
                 $select = mysqli_query($db, 
                 "INSERT INTO `images` (`adress`, `name`) 
-                VALUES ('pub/img/{$_FILES['image']['name']}', '{$_FILES['image']['name']}')"
+                VALUES ('pub/img', '{$_FILES['image']['name']}')"
                 );
-
 
                 header('Location: '.$_SERVER['PHP_SELF']);
                 echo "Картинка загружена";
@@ -65,10 +64,11 @@ show_gallery();
     console.log(modal, modal.length, modal[0]);
     for (let i = 0; i < modal.length; i++) {
         let element = modal[i];
-        let link = document.getElementById(`myBtn${i}`);
+        let link = document.getElementById(`myLink${i}`);
         let span =document.getElementsByClassName(`close${i}`)[0];
         link.onclick = function() {
-            element.style.display = "block";
+            // element.style.display = "block";
+            document.cookie = `pic_id=${link.dataset.id}`;
         }
         span.onclick = function() {
             element.style.display = "none";
