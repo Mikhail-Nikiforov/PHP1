@@ -1,8 +1,27 @@
 <?php
+declare(strict_types=1);
+
+ini_set('error_reporting', (string)E_ALL);
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+
+include_once('function.php');
+
+$db = mysqli_connect('localhost', 'root', 'root', 'gbphp1');
+    
+if (!$db) {
+  exit("Не удалось соединиться:" . mysqli_connect_errno());
+}
+
 if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
     if (preg_match("/^.*(\.jpg|\.jpeg|\.png)$/", $_FILES['image']['name'])) {
         if ($_FILES['image']['size'] < 300000) {
-            if (move_uploaded_file($_FILES['image']['tmp_name'], 'pub/img/'. time() . "_" . $_FILES['image']['name'])) {
+            if (move_uploaded_file($_FILES['image']['tmp_name'], 'pub/img/'. $_FILES['image']['name'])) {
+                $select = mysqli_query($db, 
+                "INSERT INTO `images` (`adress`, `name`) 
+                VALUES ('pub/img', '{$_FILES['image']['name']}')"
+                );
+
                 header('Location: '.$_SERVER['PHP_SELF']);
                 echo "Картинка загружена";
                 exit();
@@ -19,6 +38,8 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
 } else {
     echo "Картинки нет";
 }
+
+mysqli_close($db);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,29 +56,7 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
     <input type="submit">
 </form>
 <?php
-function show_gallery() {
-    $photos_arr = array_filter(scandir("./pub/img"), function($file) {
-        return !preg_match("/^\..*$/", $file) && !is_dir($file);
-    });
-    $count = 0;
-    foreach ($photos_arr as $value) {
-        echo "
-        <button id='myBtn" . $count . "'>
-            <img src='pub/img/$value' width='100'>
-        </button>
-        <div id='myModal" . $count . "' class='modal'>
-          <div class='modal-content'>
-            <div class='modal-header'>
-              <span class='close" . $count++ . "'>&times;</span>
-            </div>
-            <div class='modal-body'>
-            <img class='pic-full' src='pub/img/$value'>
-            </div>
-          </div>
-        </div>
-        ";
-    }
-}
+
 show_gallery();
 ?>
 <script>
@@ -65,10 +64,11 @@ show_gallery();
     console.log(modal, modal.length, modal[0]);
     for (let i = 0; i < modal.length; i++) {
         let element = modal[i];
-        let link = document.getElementById(`myBtn${i}`);
+        let link = document.getElementById(`myLink${i}`);
         let span =document.getElementsByClassName(`close${i}`)[0];
         link.onclick = function() {
-            element.style.display = "block";
+            // element.style.display = "block";
+            document.cookie = `pic_id=${link.dataset.id}`;
         }
         span.onclick = function() {
             element.style.display = "none";
