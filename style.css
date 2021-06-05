@@ -1,0 +1,17 @@
+.item {
+    display: flex;
+    margin: 20px;
+    align-items: center;
+}
+.item_info {
+margin: 0 0 0 10px;
+}
+.item_title {
+    margin: 0;
+}
+.form {
+    display: flex;
+    align-items: baseline;
+    flex-direction: column;
+    justify-content: center;
+}
