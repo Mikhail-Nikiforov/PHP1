@@ -20,15 +20,21 @@ include_once('../function.php');
 </head>
 <body>
     <?php
-        if (isset($_GET['added'])) {
-            echo "Товар добавлен";
-        } elseif (isset($_GET['edited'])) {
-            echo "Товар отредактирован";
-        } elseif (isset($_GET['deleted'])) {
-            echo "Товар удален";
+        echo session_id();
+        if (isset($_SESSION['$admin_access']) && ($_SESSION['$admin_access'] == 1)) {
+            if (isset($_GET['added'])) {
+                echo "Товар добавлен";
+            } elseif (isset($_GET['edited'])) {
+                echo "Товар отредактирован";
+            } elseif (isset($_GET['deleted'])) {
+                echo "Товар удален";
+            }
+            show_catalog($_SESSION['$admin_access']);
+        } else {
+            echo "Страница только для администраторов!";
         }
-        show_catalog(1)
+
     ?>
-    <a href="createProduct.php" class="link">Добавить товар</a>
+    
 </body>
 </html>
