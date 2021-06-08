@@ -7,13 +7,7 @@ ini_set('display_startup_errors', '1');
 
 include_once('function.php');
 
-session_start();
-
-// if (isset($_GET['logout'])) {
-//     unset($_SESSION['login']);
-//     header('Location: index.php');
-//     exit();
-// } 
+session_start(); 
 
 if (isset($_POST['signup_form'])) {
     authorization($_POST['su_login'], $_POST['su_password']);

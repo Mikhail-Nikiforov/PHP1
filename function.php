@@ -169,7 +169,6 @@
     ));
     if (isset($select['id'])) {
       echo "Пользователь с таким логином уже зарегестрирован";
-      var_dump($select);
       unset($_POST['su_login']);
     } else {
       $password = $password ?? "";
@@ -185,8 +184,6 @@
       header('Location: '.'index.php?signup=1');             
       exit();
     }
-    
-
     
   }
 ?>
