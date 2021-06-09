@@ -6,7 +6,9 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 
 include_once('function.php');
-
+header('Cache-Control: no cache'); //no cache
+session_cache_limiter('private_no_expire'); // works
+//session_cache_limiter('public'); // works too
 session_start();
 
 if (isset($_GET['logout'])) {

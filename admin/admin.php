@@ -7,6 +7,8 @@ ini_set('display_startup_errors', '1');
 
 include_once('../function.php');
 
+session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -20,8 +22,7 @@ include_once('../function.php');
 </head>
 <body>
     <?php
-        echo session_id();
-        if (isset($_SESSION['$admin_access']) && ($_SESSION['$admin_access'] == 1)) {
+        if (isset($_SESSION['login']) && ($_SESSION['$admin_access'] == 1)) {
             if (isset($_GET['added'])) {
                 echo "Товар добавлен";
             } elseif (isset($_GET['edited'])) {
