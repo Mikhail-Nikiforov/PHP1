@@ -6,9 +6,9 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 
 include_once('function.php');
-header('Cache-Control: no cache'); //no cache
-session_cache_limiter('private_no_expire'); // works
-//session_cache_limiter('public'); // works too
+header('Cache-Control: no cache');
+session_cache_limiter('private_no_expire');
+
 session_start();
 
 if (isset($_GET['logout'])) {
@@ -19,7 +19,9 @@ if (isset($_GET['logout'])) {
 
 if (isset($_GET['signup'])) {
     echo "Вы успешно зарегистрировались";
-} 
+} elseif (isset($_GET['success_order'])) {
+    echo "Заказ передан в обработку";
+}
 
 if (isset($_POST['login_form']) && isset($_POST['login'])) {
     authentication($_POST['login'], $_POST['password']);

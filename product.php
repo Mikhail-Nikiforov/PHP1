@@ -8,29 +8,13 @@
 
     session_start();
 
-    if (isset($_POST['add-product'])) {
-        if (isset($_SESSION['login'])) {
-            $db = mysqli_connect('localhost', 'root', 'root', 'gbphp1');
-            if (!$db) {
-              exit("Не удалось соединиться:" . mysqli_connect_errno());
-            }
+    if (empty($_GET['id'])) {
+        die("Нет, ID");
+    }
+    $product_id = (int)$_GET['id'];
 
-            $select_users = mysqli_fetch_assoc(mysqli_query($db, "SELECT `id`, `role`, `login` FROM `users` WHERE `login` = '{$_SESSION['login']}'"));
-
-            $select_carts = mysqli_fetch_assoc(mysqli_query($db, 
-            "SELECT `id`, `id_customer`, `id_product`, `quantity` FROM `carts` 
-            WHERE `id_customer` = '{$select_users["id"]}' AND `id_product` = '{$_POST["add-product"]}'"));
-
-            if (isset($select_carts['id'])) {
-                mysqli_query($db, "UPDATE `carts` SET `quantity` =  `quantity` + 1 
-                WHERE `id_customer` = '{$select_users["id"]}' AND `id_product` = '{$_POST["add-product"]}'");
-            } else {
-                mysqli_query($db, "INSERT INTO `carts` ( `id_customer`, `id_product`, `quantity`) 
-                VALUES ('{$select_users["id"]}', '{$_POST["add-product"]}', '1')");
-            }
-        } else {
-            echo 'Добавлять товары в корзину могут только авторизованные пользователи <br>';
-        }
+    if (empty($_SESSION['login'])) {
+        echo 'Добавлять товары в корзину могут только авторизованные пользователи <br>';
     }
 ?>
 <!DOCTYPE html>
@@ -44,8 +28,33 @@
 </head>
 <body>
     <?php
-
-        show_product();
+        show_product($product_id);
+        if (isset($_SESSION['login'])) {
+            echo "
+            <script type='text/javascript'>
+            let button = document.getElementById('add-product');
+            button.addEventListener('click', () => {
+            async function addProduct() {
+                const response = await fetch('api.php', {
+                    method: 'POST',
+                    headers: new Headers({
+                        'Content-Type': 'application/json'
+                    }),
+                    body: JSON.stringify({
+                        productId: button.value,
+                        login: '{$_SESSION['login']}',
+                        action: 'add',
+                    }),  
+                })
+                .then(res => res.text())
+                .catch(err => console.error(err));
+            };
+            addProduct();
+            });       
+            </script>
+            ";
+        }
     ?>
+
 </body>
 </html>

@@ -24,7 +24,8 @@
                         $description = mysqli_real_escape_string($db, htmlspecialchars(strip_tags($_POST['description'])));
 
                         $select = mysqli_query($db, 
-                        "INSERT INTO `products` (`adress`, `pic_name`, `product_name`, `price`,`description`) VALUES ('{$adress}', '{$pic_name}', '{$product_name}', '{$price}', '{$description}')"
+                        "INSERT INTO `products` (`adress`, `pic_name`, `product_name`, `price`,`description`) 
+                        VALUES ('{$adress}', '{$pic_name}', '{$product_name}', '{$price}', '{$description}')"
                         );
             
                         header('Location: '.'admin.php?added=1');
@@ -46,8 +47,6 @@
 
 
     }
-
-    
 
     mysqli_close($db);
 ?>

@@ -14,4 +14,28 @@ margin: 0 0 0 10px;
     align-items: baseline;
     flex-direction: column;
     justify-content: center;
+    margin: 0 10px;
+}
+
+.order {
+    display: flex;
+    margin: 50px 0;
+    border: 1px solid black;
+    max-width: 500px;
+}
+.order_item_list {
+    display: flex;
+    flex-direction: column;
+}
+.order_item {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+.order_sum {
+    align-self: flex-end;
+}
+
+.hide {
+    display: none;
 }
